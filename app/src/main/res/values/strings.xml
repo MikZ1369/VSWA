@@ -8,4 +8,7 @@
     <string name="CloudWithRain">🌧️</string>
     <string name="Fog">🌫️</string>
     <string name="Cloud">☁</string>
+    <string name="WelcomeMassage">Hi. Please enter the name of the place /</string>
+    <string name="NextButton">---></string>
+    <string name="HintLocation">location</string>
 </resources>

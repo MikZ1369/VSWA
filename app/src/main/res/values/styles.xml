@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="DarkMode" parent="android:Theme.DeviceDefault.NoActionBar">
+        <item name="android:textColor">@color/White</item>
+        <item name="android:background">@color/Black</item>
+        <item name="android:seekBarStyle">@color/Black</item>
+        <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/Black</item>
+    </style>
+
+</resources>

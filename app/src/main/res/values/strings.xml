@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VSWA</string>
+    <string name="Sun">☀</string>
+    <string name="SunBehindCloud">⛅</string>
+    <string name="Tornado">🌪️</string>
+    <string name="CloudWithSnow">🌨️</string>
+    <string name="CloudWithLightning">🌩️</string>
+    <string name="CloudWithRain">🌧️</string>
+    <string name="Fog">🌫️</string>
+    <string name="Cloud">☁</string>
+</resources>

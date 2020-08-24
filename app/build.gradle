@@ -4,6 +4,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
     defaultConfig {
         applicationId "com.vswa"
         minSdkVersion 14
@@ -12,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //create BuildConfig variables
+        buildConfigField "String", "ACCESS_TOKEN", keystoreProperties["ACCESS_TOKEN"]
     }
 
     buildTypes {

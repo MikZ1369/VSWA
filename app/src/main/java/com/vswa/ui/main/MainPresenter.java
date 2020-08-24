@@ -1,9 +1,8 @@
 package com.vswa.ui.main;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 
-import com.vswa.model.DataManager;
+import com.vswa.data.DataManager;
 
 public class MainPresenter {
     private MainActivity activity;

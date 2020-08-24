@@ -2,7 +2,7 @@ package com.vswa.ui.start;
 
 import android.content.Context;
 
-import com.vswa.model.DataManager;
+import com.vswa.data.DataManager;
 
 public class StartPresenter {
     private DataManager dataManager;

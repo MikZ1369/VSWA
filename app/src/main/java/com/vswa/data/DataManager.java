@@ -5,21 +5,31 @@ import android.content.SharedPreferences;
 
 import com.vswa.BuildConfig;
 import com.vswa.data.models.LocationApp;
+import com.vswa.data.models.WeatherData;
+import com.vswa.util.HttpRequest;
 
 public class DataManager {
     protected final String APP_PREFERENCES_KEY = "com.vswa";
     private final String LOCATION_SAVED_KEY = "LOCATION_SAVED_KEY";
     private final String LOCATION_NAME_KEY = "LOCATION_NAME_KEY";
+    private final String LOCATION_LAT = "LOCATION_LAT";
+    private final String LOCATION_LON = "LOCATION_LON";
+    private final String TARGET_URL_CURRENT_WEATHER = "https://api.openweathermap.org/data/2.5/weather";
+    private final String TARGET_URL_ONE_CALL = "https://api.openweathermap.org/data/2.5/onecall";
     private SharedPreferences sharedPreferences;
 
     public DataManager(Context context) {
         sharedPreferences = context.getSharedPreferences(APP_PREFERENCES_KEY,
                 Context.MODE_PRIVATE);
-
     }
 
-    public String getLocationName() {
-        return sharedPreferences.getString(LOCATION_NAME_KEY, "");
+    public WeatherData getWeatherData() {
+        LocationApp locationApp = getLocation();
+        String jsonResponse = HttpRequest.executePost(TARGET_URL_CURRENT_WEATHER,
+                "lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
+                        "&%20exclude=hourly,daily&appid=" + getAccessToken());
+        WeatherData weatherData = WeatherParser.getWeatherDataByJson(jsonResponse);
+        return weatherData;
     }
 
     public void saveLocationName(String locationName) {
@@ -31,9 +41,33 @@ public class DataManager {
         return sharedPreferences.getBoolean(LOCATION_SAVED_KEY, false);
     }
 
-    private LocationApp getLocationCoordinatesByLocationName() {
+    private LocationApp getLocation() {
+        LocationApp locationApp = new LocationApp();
+        if (sharedPreferences.getFloat(LOCATION_LON, -200) == -200) {
+            String locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
+            locationApp = getLocationCoordinatesByLocationName(locationName);
+            locationApp.locationName = locationName;
+            saveLocationCoordinates(locationApp);
+            return locationApp;
+        } else {
+            locationApp.locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
+            locationApp.longitude = sharedPreferences.getFloat(LOCATION_LON, -200);
+            locationApp.latitude = sharedPreferences.getFloat(LOCATION_LAT, -200);
+            return locationApp;
+        }
+    }
 
-        return new LocationApp();
+
+    private void saveLocationCoordinates(LocationApp locationApp) {
+        sharedPreferences.edit().putFloat(LOCATION_LAT, locationApp.latitude).apply();
+        sharedPreferences.edit().putFloat(LOCATION_LON, locationApp.longitude).apply();
+    }
+
+    private LocationApp getLocationCoordinatesByLocationName(String locationName) {
+        String jsonResponse = HttpRequest.executePost(TARGET_URL_CURRENT_WEATHER,
+                "q=" + locationName + "&appid=" + getAccessToken());
+        LocationApp locationApp = WeatherParser.getCoordinatesByCurrentWeather(jsonResponse);
+        return locationApp;
     }
 
     private String getAccessToken() {

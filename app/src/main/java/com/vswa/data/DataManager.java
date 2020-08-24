@@ -15,6 +15,7 @@ public class DataManager {
     public DataManager(Context context) {
         sharedPreferences = context.getSharedPreferences(APP_PREFERENCES_KEY,
                 Context.MODE_PRIVATE);
+
     }
 
     public String getLocationName() {
@@ -30,7 +31,7 @@ public class DataManager {
         return sharedPreferences.getBoolean(LOCATION_SAVED_KEY, false);
     }
 
-    private LocationApp getLocationCoordinates() {
+    private LocationApp getLocationCoordinatesByLocationName() {
 
         return new LocationApp();
     }

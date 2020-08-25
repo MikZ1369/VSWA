@@ -25,8 +25,9 @@ public class DataManager {
 
     public WeatherData getWeatherData() {
         LocationApp locationApp = getLocation();
-        String jsonResponse = HttpRequest.executePost(TARGET_URL_CURRENT_WEATHER,
-                "lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
+        if (locationApp == null) return null;
+        String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_ONE_CALL +
+                "?lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
                         "&%20exclude=hourly,daily&appid=" + getAccessToken());
         WeatherData weatherData = WeatherParser.getWeatherDataByJson(jsonResponse);
         return weatherData;
@@ -46,6 +47,7 @@ public class DataManager {
         if (sharedPreferences.getFloat(LOCATION_LON, -200) == -200) {
             String locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
             locationApp = getLocationCoordinatesByLocationName(locationName);
+            if (locationApp == null) return null;
             locationApp.locationName = locationName;
             saveLocationCoordinates(locationApp);
             return locationApp;
@@ -64,10 +66,13 @@ public class DataManager {
     }
 
     private LocationApp getLocationCoordinatesByLocationName(String locationName) {
-        String jsonResponse = HttpRequest.executePost(TARGET_URL_CURRENT_WEATHER,
-                "q=" + locationName + "&appid=" + getAccessToken());
-        LocationApp locationApp = WeatherParser.getCoordinatesByCurrentWeather(jsonResponse);
-        return locationApp;
+        String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_CURRENT_WEATHER +
+                "?q=" + locationName + "&appid=" + getAccessToken());
+        if (jsonResponse != null) {
+            LocationApp locationApp = WeatherParser.getCoordinatesByCurrentWeather(jsonResponse);
+            return locationApp;
+        }
+        return null;
     }
 
     private String getAccessToken() {

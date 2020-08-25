@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import com.vswa.R;
+import com.vswa.ui.home.HomeFragment;
 import com.vswa.ui.start.StartFragment;
 
 public class MainActivity extends Activity {
@@ -46,7 +47,5 @@ public class MainActivity extends Activity {
         openFragment(new StartFragment(), false);
     }
 
-    public void openHomeFrame() {
-
-    }
+    public void openHomeFrame() { openFragment(new HomeFragment(), false);}
 }

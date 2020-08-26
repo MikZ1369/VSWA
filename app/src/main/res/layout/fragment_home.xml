@@ -1,6 +1,587 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/fragment_home_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_menu_24" />
+
+    <TextView
+        android:id="@+id/fragment_home_location_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_home_menu_button"
+        android:layout_marginTop="30dp"
+        android:layout_centerInParent="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="MOSCOW" />
+
+    <TextView
+        android:id="@+id/fragment_home_weather_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_home_location_name"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        tools:text="Light rain" />
+
+    <RelativeLayout
+        android:id="@+id/fragment_home_current_weather_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_home_weather_main"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/fragment_home_weather_icon"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_centerVertical="true"
+            tools:src="@drawable/ic_thunderstorm" />
+
+        <TextView
+            android:id="@+id/fragment_home_current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/fragment_home_weather_icon"
+            android:textSize="100sp"
+            android:textStyle="bold"
+            tools:text="13" />
+
+        <TextView
+            android:id="@+id/fragment_home_current_temp_degree_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/fragment_home_current_temp"
+            android:text="@string/DegreeSign"
+            android:textSize="100sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_home_current_temp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/fragment_home_weather_icon"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/Day"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/Night"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_wind"
+                    android:textSize="12sp"
+                    android:tint="@color/Gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/MetreSec"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text=", SE direction" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fragment_home_current_weather_frame">
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day1_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue" />
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day1_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day1_date"
+                tools:src="@drawable/ic_few_clouds_day" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_home_forecast_day1_icon">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day1_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day1_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_home_forecast_day1">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day2_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue"/>
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day2_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day2_date"
+                tools:src="@drawable/ic_few_clouds_day"/>
+
+
+            <LinearLayout
+                android:layout_below="@id/fragment_home_forecast_day2_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day2_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day2_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_home_forecast_day2">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day3_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue"/>
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day3_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day3_date"
+                tools:src="@drawable/ic_few_clouds_day"/>
+
+
+            <LinearLayout
+                android:layout_below="@id/fragment_home_forecast_day3_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day3_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day3_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_home_forecast_day3">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day4_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue"/>
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day4_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day4_date"
+                tools:src="@drawable/ic_few_clouds_day"/>
+
+
+            <LinearLayout
+                android:layout_below="@id/fragment_home_forecast_day4_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day4_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day4_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_home_forecast_day4">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day5_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue"/>
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day5_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day5_date"
+                tools:src="@drawable/ic_few_clouds_day"/>
+
+
+            <LinearLayout
+                android:layout_below="@id/fragment_home_forecast_day5_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day5_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day5_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragment_home_forecast_day6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_home_forecast_day5">
+
+            <TextView
+                android:id="@+id/fragment_home_forecast_day6_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                tools:text="Tue" />
+
+            <ImageView
+                android:id="@+id/fragment_home_forecast_day6_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/fragment_home_forecast_day6_date"
+                tools:src="@drawable/ic_few_clouds_day" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_home_forecast_day6_icon">
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day6_day_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12sp"
+                    tools:text="16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fragment_home_forecast_day6_night_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp"
+                    tools:text="10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DegreeSign"
+                    android:textColor="@color/Gray"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

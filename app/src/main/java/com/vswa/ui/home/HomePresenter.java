@@ -8,9 +8,11 @@ import com.vswa.data.models.WeatherData;
 
 public class HomePresenter {
     private DataManager dataManager;
+    private HomeFragment view;
 
-    public HomePresenter(Context context) {
+    public HomePresenter(Context context, HomeFragment view) {
         dataManager = new DataManager(context);
+        this.view = view;
     }
 
     public void onBindView() {

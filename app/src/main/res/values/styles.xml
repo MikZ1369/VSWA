@@ -22,7 +22,7 @@
 
     <style name="DarkTextView" parent="android:Widget.TextView">
         <item name="android:background">@color/Invisible</item>
-        <item name="android:textColor">@color/Black</item>
+        <item name="android:textColor">@color/White</item>
     </style>
 
 </resources>

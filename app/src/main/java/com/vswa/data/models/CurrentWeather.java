@@ -1,6 +1,7 @@
 package com.vswa.data.models;
 
 public class CurrentWeather {
+    public String timeZone;
     public long dt;
     public float temp;
     public float feelsLike;

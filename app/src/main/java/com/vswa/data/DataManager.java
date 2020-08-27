@@ -30,6 +30,7 @@ public class DataManager {
                 "?lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
                         "&%20exclude=hourly,daily&appid=" + getAccessToken());
         WeatherData weatherData = WeatherParser.getWeatherDataByJson(jsonResponse);
+        weatherData.location = locationApp;
         return weatherData;
     }
 

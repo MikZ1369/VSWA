@@ -13,11 +13,17 @@
         <item name="android:editTextColor">@color/Black</item>
         <item name="android:tint">@color/Black</item>
         <item name="android:textViewStyle">@style/LightTextView</item>
+        <item name="android:checkboxStyle">@style/LightCheckBox</item>
     </style>
     
     <style name="LightTextView" parent="android:Widget.TextView">
         <item name="android:background">@color/Invisible</item>
         <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="LightCheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:buttonTint">@color/Black</item>
     </style>
 
     <style name="DarkTextView" parent="android:Widget.TextView">

@@ -20,4 +20,5 @@ public class Constants {
     public static final String THUNDERSTORM_NIGHT = "11n";
     public static final String SNOW_NIGHT = "13n";
     public static final String MIST_NIGHT = "50n";
+
 }

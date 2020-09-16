@@ -7,6 +7,7 @@ import com.vswa.R;
 import com.vswa.data.Constants;
 import com.vswa.data.DataManager;
 import com.vswa.data.models.WeatherData;
+import com.vswa.ui.main.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ public class HomePresenter {
     private HomeFragment view;
     private Context context;
 
-    public HomePresenter(Context context, HomeFragment view) {
-        dataManager = new DataManager(context);
+    public HomePresenter(Context context, HomeFragment view, MainActivity activity) {
+        dataManager = new DataManager(context, activity);
         this.view = view;
         this.context = context;
     }
@@ -153,3 +154,4 @@ public class HomePresenter {
         return context.getResources().getString(R.string.Mon);
     }
 }
+

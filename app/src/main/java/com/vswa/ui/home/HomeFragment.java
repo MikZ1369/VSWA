@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.vswa.R;
 import com.vswa.data.models.ForecastWeather;
+import com.vswa.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment {
         daysNightTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day5_night_temp));
         daysNightTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day6_night_temp));
 
-        homePresenter = new HomePresenter(getActivity(), this);
+        homePresenter = new HomePresenter(getActivity(), this, (MainActivity) getActivity());
         homePresenter.onBindView();
         return view;
     }

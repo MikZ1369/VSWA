@@ -79,4 +79,16 @@ public class WeatherParser {
         }
         return null;
     }
+
+    public static String getLocationNameByCurrentWeather(String json) {
+        try {
+            String locationName;
+            JSONObject jsonObject = new JSONObject(json);
+            locationName = jsonObject.getString("name");
+            return locationName;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

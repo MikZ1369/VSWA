@@ -10,7 +10,7 @@ public class MainPresenter {
 
     public MainPresenter(MainActivity activity, Context context) {
         this.activity = activity;
-        dataManager = new DataManager(context);
+        dataManager = new DataManager(context, activity);
     }
 
     public void onAttach() {

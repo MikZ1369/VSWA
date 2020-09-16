@@ -15,4 +15,5 @@
     <string name="Fri">Fri</string>
     <string name="Sat">Sat</string>
     <string name="Sun">Sun</string>
+    <string name="CurrentLocation">Current Location</string>
 </resources>

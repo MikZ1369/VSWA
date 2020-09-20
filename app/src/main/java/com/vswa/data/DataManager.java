@@ -34,7 +34,7 @@ public class DataManager {
         this.activity = activity;
     }
 
-    public WeatherData getWeatherData() {
+    public WeatherData getWeatherData() throws NotAvailableLocationException {
         LocationApp locationApp = getLocation();
         if (locationApp == null) return null;
         String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_ONE_CALL +
@@ -67,7 +67,7 @@ public class DataManager {
         return sharedPreferences.getInt(THEME_KEY, 0);
     }
 
-    private LocationApp getLocation() {
+    private LocationApp getLocation() throws NotAvailableLocationException {
         LocationApp locationApp = new LocationApp();
         if (activity.checkLocationPermission()) {
             LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
@@ -79,7 +79,7 @@ public class DataManager {
                 locationApp.locationName = getLocationNameByLocationCoordinates(locationApp);
                 return locationApp;
             } catch (NullPointerException e) {
-                return null;
+                throw new NotAvailableLocationException("Location not available");
             }
         } else if (sharedPreferences.getFloat(LOCATION_LON, -200) == -200) {
             String locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
@@ -123,5 +123,11 @@ public class DataManager {
 
     private String getAccessToken() {
         return BuildConfig.ACCESS_TOKEN;
+    }
+
+    public static class NotAvailableLocationException extends Exception {
+        public NotAvailableLocationException(String errorMessage) {
+            super(errorMessage);
+        }
     }
 }

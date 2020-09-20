@@ -1,6 +1,11 @@
 package com.vswa.ui.home;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,6 +32,10 @@ public class HomePresenter {
     }
 
     public void onBindView() {
+        updateLocation();
+    }
+
+    private void refreshWeatherData() {
         HomePresenterAsync homePresenterAsync = new HomePresenterAsync();
         homePresenterAsync.execute();
     }
@@ -36,15 +45,38 @@ public class HomePresenter {
         @Override
         protected WeatherData doInBackground(Void... voids) {
             time = System.currentTimeMillis();
-            return dataManager.getWeatherData();
+            try {
+                return dataManager.getWeatherData();
+            } catch (DataManager.NotAvailableLocationException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         @Override
         protected void onPostExecute(WeatherData weatherData) {
             super.onPostExecute(weatherData);
-            long timeHasPassed = System.currentTimeMillis() - time;
-            Log.d("Test", "Time ms download and parse:" + timeHasPassed);
-            setView(weatherData);
+            if (weatherData != null) {
+                setView(weatherData);
+            } else {
+                updateLocation();
+            }
+        }
+    }
+
+    private void updateLocation() {
+        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        final LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                refreshWeatherData();
+                locationManager.removeUpdates(this);
+            }
+        };
+        if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(
+                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
         }
     }
 

@@ -5,6 +5,7 @@
         <item name="android:seekBarStyle">@color/Black</item>
         <item name="android:tint">@color/White</item>
         <item name="android:textViewStyle">@style/DarkTextView</item>
+        <item name="android:alertDialogStyle">@style/DarkAlertDialog</item>
     </style>
 
     <style name="LightMode" parent="android:Theme.DeviceDefault.NoActionBar">
@@ -14,6 +15,7 @@
         <item name="android:tint">@color/Black</item>
         <item name="android:textViewStyle">@style/LightTextView</item>
         <item name="android:checkboxStyle">@style/LightCheckBox</item>
+        <item name="android:alertDialogStyle">@style/LightAlertDialog</item>
     </style>
     
     <style name="LightTextView" parent="android:Widget.TextView">
@@ -30,5 +32,14 @@
         <item name="android:background">@color/Invisible</item>
         <item name="android:textColor">@color/White</item>
     </style>
+
+    <style name="LightAlertDialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:background">@color/White</item>
+    </style>
+
+    <style name="DarkAlertDialog" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:textColor">@color/White</item>
+    </style>
+
 
 </resources>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import com.vswa.BuildConfig;
 import com.vswa.data.models.LocationApp;
@@ -24,6 +25,7 @@ public class DataManager {
     private final String LOCATION_LON = "LOCATION_LON";
     private final String TARGET_URL_CURRENT_WEATHER = "https://api.openweathermap.org/data/2.5/weather";
     private final String TARGET_URL_ONE_CALL = "https://api.openweathermap.org/data/2.5/onecall";
+    private final String THEME_KEY = "THEME_KEY";
     private SharedPreferences sharedPreferences;
 
     public DataManager(Context context, MainActivity activity) {
@@ -55,6 +57,14 @@ public class DataManager {
     public boolean checkLocationAvailability() {
         return (sharedPreferences.getBoolean(LOCATION_SAVED_KEY, false) ||
                 sharedPreferences.getBoolean(LOCATION_AVAILABILITY_KEY, false));
+    }
+
+    public void setThemeKey(int key) {
+        sharedPreferences.edit().putInt(THEME_KEY, key).apply();
+    }
+
+    public int getThemeKey() {
+        return sharedPreferences.getInt(THEME_KEY, 0);
     }
 
     private LocationApp getLocation() {

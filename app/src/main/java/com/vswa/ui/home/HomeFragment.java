@@ -18,6 +18,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private HomePresenter homePresenter;
+    private ImageView settingsImageView;
     private TextView locationNameTextView;
     private TextView weatherMainTextView;
     private ImageView weatherIconImageView;
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        settingsImageView = view.findViewById(R.id.fragment_home_menu_button);
         locationNameTextView = view.findViewById(R.id.fragment_home_location_name);
         weatherMainTextView = view.findViewById(R.id.fragment_home_weather_main);
         weatherIconImageView = view.findViewById(R.id.fragment_home_weather_icon);
@@ -76,6 +78,12 @@ public class HomeFragment extends Fragment {
 
         homePresenter = new HomePresenter(getActivity(), this, (MainActivity) getActivity());
         homePresenter.onBindView();
+        settingsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).openSettingsFrame();
+            }
+        });
         return view;
     }
 

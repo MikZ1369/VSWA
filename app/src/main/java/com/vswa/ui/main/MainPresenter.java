@@ -20,4 +20,8 @@ public class MainPresenter {
             activity.openWelcomeFrame();
         }
     }
+
+    public int getThemeKey() {
+        return dataManager.getThemeKey();
+    }
 }

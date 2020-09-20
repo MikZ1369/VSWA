@@ -2,6 +2,7 @@ package com.vswa.ui.home;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.vswa.R;
 import com.vswa.data.Constants;
@@ -17,6 +18,7 @@ public class HomePresenter {
     private DataManager dataManager;
     private HomeFragment view;
     private Context context;
+    private long time;
 
     public HomePresenter(Context context, HomeFragment view, MainActivity activity) {
         dataManager = new DataManager(context, activity);
@@ -33,17 +35,21 @@ public class HomePresenter {
 
         @Override
         protected WeatherData doInBackground(Void... voids) {
+            time = System.currentTimeMillis();
             return dataManager.getWeatherData();
         }
 
         @Override
         protected void onPostExecute(WeatherData weatherData) {
             super.onPostExecute(weatherData);
+            long timeHasPassed = System.currentTimeMillis() - time;
+            Log.d("Test", "Time ms download and parse:" + timeHasPassed);
             setView(weatherData);
         }
     }
 
     private void setView(WeatherData weatherData) {
+        time = System.currentTimeMillis();
         view.setLocationName(weatherData.location.locationName.toUpperCase());
         view.setWeatherMain(weatherData.currentWeather.weatherName);
         view.setWeatherIcon(getResourceIdForWeatherIcon(weatherData.currentWeather.weatherIcon));
@@ -72,6 +78,8 @@ public class HomePresenter {
         view.setForecastDate(forecastDateList);
         view.setForecastIcon(iconIdList);
         view.setForecastTemp(forecastTempDayList, forecastTempNightList);
+        long timeHasPassed = System.currentTimeMillis() - time;
+        Log.d("Test", "Time ms set view:" + timeHasPassed);
     }
 
     private int getResourceIdForWeatherIcon(String iconName) {

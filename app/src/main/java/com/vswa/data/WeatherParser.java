@@ -43,8 +43,8 @@ public class WeatherParser {
                 ForecastWeather forecastWeather = new ForecastWeather();
                 JSONObject day = dailyArray.getJSONObject(item);
                 forecastWeather.dt = day.getLong("dt");
-                forecastWeather.tempDay = (float) day.getJSONObject("temp").getDouble("day");
-                forecastWeather.tempNight = (float) day.getJSONObject("temp").getDouble("night");
+                forecastWeather.tempDay = (float) day.getJSONObject("temp").getDouble("max");
+                forecastWeather.tempNight = (float) day.getJSONObject("temp").getDouble("min");
 
                 forecastWeather.feelsLikeDay = (float) day.getJSONObject("feels_like").getDouble("day");
                 forecastWeather.feelsLikeNight = (float) day.getJSONObject("feels_like").getDouble("night");

@@ -48,6 +48,9 @@ public class HomeFragment extends Fragment {
         currentWindSpeedTextView = view.findViewById(R.id.fragment_home_current_wind_speed);
         currentWindDegTextView = view.findViewById(R.id.fragment_home_current_wind_deg);
 
+        if (!daysDate.isEmpty()) {
+            daysDate.clear();
+        }
         daysDate.add((TextView) view.findViewById(R.id.fragment_home_forecast_day1_date));
         daysDate.add((TextView) view.findViewById(R.id.fragment_home_forecast_day2_date));
         daysDate.add((TextView) view.findViewById(R.id.fragment_home_forecast_day3_date));
@@ -55,6 +58,9 @@ public class HomeFragment extends Fragment {
         daysDate.add((TextView) view.findViewById(R.id.fragment_home_forecast_day5_date));
         daysDate.add((TextView) view.findViewById(R.id.fragment_home_forecast_day6_date));
 
+        if (!daysWeatherIcon.isEmpty()) {
+            daysWeatherIcon.clear();
+        }
         daysWeatherIcon.add((ImageView) view.findViewById(R.id.fragment_home_forecast_day1_icon));
         daysWeatherIcon.add((ImageView) view.findViewById(R.id.fragment_home_forecast_day2_icon));
         daysWeatherIcon.add((ImageView) view.findViewById(R.id.fragment_home_forecast_day3_icon));
@@ -62,6 +68,9 @@ public class HomeFragment extends Fragment {
         daysWeatherIcon.add((ImageView) view.findViewById(R.id.fragment_home_forecast_day5_icon));
         daysWeatherIcon.add((ImageView) view.findViewById(R.id.fragment_home_forecast_day6_icon));
 
+        if (!daysDayTemp.isEmpty()) {
+            daysDayTemp.clear();
+        }
         daysDayTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day1_day_temp));
         daysDayTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day2_day_temp));
         daysDayTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day3_day_temp));
@@ -69,6 +78,9 @@ public class HomeFragment extends Fragment {
         daysDayTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day5_day_temp));
         daysDayTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day6_day_temp));
 
+        if (!daysNightTemp.isEmpty()) {
+            daysNightTemp.clear();
+        }
         daysNightTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day1_night_temp));
         daysNightTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day2_night_temp));
         daysNightTemp.add((TextView) view.findViewById(R.id.fragment_home_forecast_day3_night_temp));

@@ -23,6 +23,7 @@ public class HomePresenter {
     private DataManager dataManager;
     private HomeFragment view;
     private Context context;
+    private WeatherData mWeatherData;
     private long time;
 
     public HomePresenter(Context context, HomeFragment view, MainActivity activity) {
@@ -32,6 +33,9 @@ public class HomePresenter {
     }
 
     public void onBindView() {
+        if (mWeatherData != null) {
+            setView(mWeatherData);
+        }
         updateLocation();
     }
 
@@ -58,6 +62,7 @@ public class HomePresenter {
             super.onPostExecute(weatherData);
             if (weatherData != null) {
                 setView(weatherData);
+                mWeatherData = weatherData;
             } else {
                 updateLocation();
             }

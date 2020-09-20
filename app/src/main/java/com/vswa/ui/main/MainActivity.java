@@ -35,6 +35,16 @@ public class MainActivity extends Activity {
         mainPresenter.onAttach();
     }
 
+    @Override
+    public void onBackPressed() {
+        int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void openFragment(Fragment fragment, boolean forceNewFragment) {
         String backStateName = fragment.getClass().getName();
 

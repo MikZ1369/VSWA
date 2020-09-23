@@ -5,13 +5,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.vswa.R;
 import com.vswa.ui.home.HomeFragment;
-import com.vswa.ui.init.InitLocationFragment;
+import com.vswa.ui.init.InitFragment;
 import com.vswa.ui.settings.SettingsFragment;
 
 public class MainActivity extends Activity {
@@ -68,7 +67,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void openWelcomeFrame() { openFragment(new InitLocationFragment(), false); }
+    public void openWelcomeFrame() { openFragment(new InitFragment(), false); }
 
     public void openHomeFrame() { openFragment(new HomeFragment(), false);}
 

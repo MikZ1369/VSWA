@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">VSWA</string>
     <string name="MetreSec">m/s</string>
-    <string name="WelcomeMassage">Hi. Please enter the name of the place /</string>
+    <string name="WelcomeMassage">Welcome user!</string>
+    <string name="RequestMassage">Let me access your location data</string>
     <string name="NextButton">---></string>
     <string name="HintLocation">location</string>
     <string name="NextSevenDays">Next 7 days</string>
+    <string name="Allow">Allow</string>
     <string name="Day">Day</string>
     <string name="Night">Night</string>
     <string name="DegreeSign">°</string>

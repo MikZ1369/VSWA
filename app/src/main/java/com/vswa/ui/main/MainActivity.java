@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.vswa.R;
@@ -19,17 +21,16 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainPresenter = new MainPresenter(this, this);
-        switch (mainPresenter.getThemeKey()) {
-            case 0: {
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
                 setTheme(R.style.LightMode);
                 break;
-            }
-            case 1: {
+            case Configuration.UI_MODE_NIGHT_YES:
                 setTheme(R.style.DarkMode);
                 break;
-            }
         }
+        mainPresenter = new MainPresenter(this, this);
         setContentView(R.layout.activity_main);
         mainPresenter.onAttach();
     }

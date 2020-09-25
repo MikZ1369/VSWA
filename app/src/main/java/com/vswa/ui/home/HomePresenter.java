@@ -1,8 +1,11 @@
 package com.vswa.ui.home;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,39 +21,55 @@ import com.vswa.ui.main.MainActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class HomePresenter {
     private DataManager dataManager;
     private HomeFragment view;
     private Context context;
     private WeatherData mWeatherData;
+    private Activity activity;
+    private Location currentLocation;
     private long time;
 
     public HomePresenter(Context context, HomeFragment view, MainActivity activity) {
         dataManager = new DataManager(context, activity);
         this.view = view;
         this.context = context;
+        this.activity = activity;
     }
 
     public void onBindView() {
         if (mWeatherData != null) {
             setView(mWeatherData);
         }
-        updateLocation();
+        refreshWeatherData();
     }
 
     private void refreshWeatherData() {
-        HomePresenterAsync homePresenterAsync = new HomePresenterAsync();
-        homePresenterAsync.execute();
+        LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        if (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ((MainActivity) activity).openWelcomeFrame();
+            return;
+        }
+        currentLocation = locationManager.getLastKnownLocation(
+                Objects.requireNonNull(locationManager.getBestProvider(new Criteria(), false)));
+        if (currentLocation != null) {
+            HomePresenterAsync homePresenterAsync = new HomePresenterAsync();
+            homePresenterAsync.execute();
+        } else {
+            updateLocation();
+        }
     }
 
+    @SuppressLint("StaticFieldLeak")
     class HomePresenterAsync extends AsyncTask<Void, Void, WeatherData> {
 
         @Override
         protected WeatherData doInBackground(Void... voids) {
             time = System.currentTimeMillis();
             try {
-                return dataManager.getWeatherData();
+                return dataManager.getWeatherData(currentLocation);
             } catch (DataManager.NotAvailableLocationException e) {
                 e.printStackTrace();
                 return null;

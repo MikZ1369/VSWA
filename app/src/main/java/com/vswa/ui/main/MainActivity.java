@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void openWelcomeFrame() { openFragment(new InitFragment(), false); }
+    public void openWelcomeFrame() { openFragment(new InitFragment(), true); }
 
     public void openHomeFrame() { openFragment(new HomeFragment(), false);}
 

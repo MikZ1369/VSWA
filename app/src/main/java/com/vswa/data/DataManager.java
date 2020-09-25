@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.util.Log;
 
 import com.vswa.BuildConfig;
 import com.vswa.data.models.LocationApp;
@@ -34,8 +33,8 @@ public class DataManager {
         this.activity = activity;
     }
 
-    public WeatherData getWeatherData() throws NotAvailableLocationException {
-        LocationApp locationApp = getLocation();
+    public WeatherData getWeatherData(Location location) throws NotAvailableLocationException {
+        LocationApp locationApp = getLocationName();
         if (locationApp == null) return null;
         String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_ONE_CALL +
                 "?lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
@@ -67,7 +66,7 @@ public class DataManager {
         return sharedPreferences.getInt(THEME_KEY, 0);
     }
 
-    private LocationApp getLocation() throws NotAvailableLocationException {
+    private LocationApp getLocationName() throws NotAvailableLocationException {
         LocationApp locationApp = new LocationApp();
         if (activity.checkLocationPermission()) {
             LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);

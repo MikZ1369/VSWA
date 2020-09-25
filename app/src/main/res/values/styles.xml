@@ -6,6 +6,7 @@
         <item name="android:tint">@color/White</item>
         <item name="android:textViewStyle">@style/DarkTextView</item>
         <item name="android:alertDialogStyle">@style/DarkAlertDialog</item>
+        <item name="android:progressBarStyle">@style/DarkProgressBar</item>
     </style>
 
     <style name="LightMode" parent="android:Theme.DeviceDefault.NoActionBar">
@@ -16,6 +17,7 @@
         <item name="android:textViewStyle">@style/LightTextView</item>
         <item name="android:checkboxStyle">@style/LightCheckBox</item>
         <item name="android:alertDialogStyle">@style/LightAlertDialog</item>
+        <item name="android:progressBarStyle">@style/LightProgressBar</item>
     </style>
     
     <style name="LightTextView" parent="android:Widget.TextView">
@@ -41,5 +43,12 @@
         <item name="android:textColor">@color/White</item>
     </style>
 
+    <style name="DarkProgressBar" parent="android:Widget.DeviceDefault.ProgressBar">
+        <item name="android:indeterminateTint">@color/White</item>
+    </style>
+
+    <style name="LightProgressBar" parent="android:Widget.DeviceDefault.ProgressBar">
+        <item name="android:indeterminateTint">@color/Black</item>
+    </style>
 
 </resources>

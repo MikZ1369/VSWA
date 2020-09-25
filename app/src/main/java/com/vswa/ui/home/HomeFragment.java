@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vswa.R;
@@ -28,6 +30,9 @@ public class HomeFragment extends Fragment {
     private TextView currentWindSpeedTextView;
     private TextView currentWindDegTextView;
 
+    private RelativeLayout weatherFrame;
+    private ProgressBar loadingProgressBar;
+
     private ArrayList<TextView> daysDate = new ArrayList<>();
     private ArrayList<ImageView> daysWeatherIcon = new ArrayList<>();
     private ArrayList<TextView> daysDayTemp = new ArrayList<>();
@@ -47,6 +52,9 @@ public class HomeFragment extends Fragment {
         currentTempNightTextView = view.findViewById(R.id.fragment_home_current_temp_night);
         currentWindSpeedTextView = view.findViewById(R.id.fragment_home_current_wind_speed);
         currentWindDegTextView = view.findViewById(R.id.fragment_home_current_wind_deg);
+
+        weatherFrame = view.findViewById(R.id.fragment_home_weather_frame);
+        loadingProgressBar = view.findViewById(R.id.fragment_home_progress_bar);
 
         if (!daysDate.isEmpty()) {
             daysDate.clear();
@@ -100,6 +108,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void setLocationName(String locationName) {
+        weatherFrame.setVisibility(View.VISIBLE);
+        loadingProgressBar.setVisibility(View.GONE);
         locationNameTextView.setText(locationName);
     }
 

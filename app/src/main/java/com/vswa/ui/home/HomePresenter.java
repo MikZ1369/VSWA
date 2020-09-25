@@ -189,7 +189,7 @@ public class HomePresenter {
     }
 
     private String getDayOfWeekFromUnixTime(long time) {
-        Date date = new Date(time);
+        Date date = new Date(time * 1000);
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE");
         String dayOfWeek = dateFormat.format(date);
         switch (dayOfWeek) {

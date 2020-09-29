@@ -5,5 +5,5 @@ import java.util.ArrayList;
 public class WeatherData {
     public CurrentWeather currentWeather;
     public ArrayList<ForecastWeather> forecastWeatherArrayList;
-    public LocationApp location;
+    public String locationName;
 }

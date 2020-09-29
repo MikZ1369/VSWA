@@ -21,6 +21,7 @@ import com.vswa.ui.main.MainActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class HomePresenter {
@@ -69,7 +70,11 @@ public class HomePresenter {
         protected WeatherData doInBackground(Void... voids) {
             time = System.currentTimeMillis();
             try {
-                return dataManager.getWeatherData(currentLocation);
+                String weatherDataJson = dataManager.requestWeatherData(currentLocation);
+                String locationName = dataManager.requestLocationName(currentLocation);
+                WeatherData weatherData = dataManager.getWeatherData(weatherDataJson);
+                weatherData.locationName = locationName;
+                return weatherData;
             } catch (DataManager.NotAvailableLocationException e) {
                 e.printStackTrace();
                 return null;
@@ -106,7 +111,7 @@ public class HomePresenter {
 
     private void setView(WeatherData weatherData) {
         time = System.currentTimeMillis();
-        view.setLocationName(weatherData.location.locationName.toUpperCase());
+        view.setLocationName(weatherData.locationName.toUpperCase());
         view.setWeatherMain(weatherData.currentWeather.weatherName);
         view.setWeatherIcon(getResourceIdForWeatherIcon(weatherData.currentWeather.weatherIcon));
         view.setCurrentTemp(getTempFromKelvin(weatherData.currentWeather.temp));
@@ -190,7 +195,7 @@ public class HomePresenter {
 
     private String getDayOfWeekFromUnixTime(long time) {
         Date date = new Date(time * 1000);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", Locale.US);
         String dayOfWeek = dateFormat.format(date);
         switch (dayOfWeek) {
             case "Mon": {

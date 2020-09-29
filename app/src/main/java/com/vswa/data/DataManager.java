@@ -33,20 +33,20 @@ public class DataManager {
         this.activity = activity;
     }
 
-    public WeatherData getWeatherData(Location location) throws NotAvailableLocationException {
-        LocationApp locationApp = getLocationName();
-        if (locationApp == null) return null;
-        String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_ONE_CALL +
-                "?lat=" + locationApp.latitude +"&lon=" + locationApp.longitude +
-                        "&%20exclude=hourly,daily&appid=" + getAccessToken());
-        WeatherData weatherData = WeatherParser.getWeatherDataByJson(jsonResponse);
-        weatherData.location = locationApp;
+    public WeatherData getWeatherData(String json) {
+        WeatherData weatherData = WeatherParser.getWeatherDataByJson(json);
         return weatherData;
     }
 
-    public void saveLocationName(String locationName) {
-        sharedPreferences.edit().putString(LOCATION_NAME_KEY, locationName).apply();
-        sharedPreferences.edit().putBoolean(LOCATION_SAVED_KEY, true).apply();
+    public String requestLocationName(Location location) throws NotAvailableLocationException {
+        return getLocationName(location).locationName;
+    }
+
+    public String requestWeatherData(Location location) throws NotAvailableLocationException {
+        String jsonResponse = HttpRequest.getJsonFromURL(TARGET_URL_ONE_CALL +
+                "?lat=" + location.getLatitude() +"&lon=" + location.getLongitude() +
+                "&%20exclude=hourly,daily&appid=" + getAccessToken());
+        return jsonResponse;
     }
 
     public void setLocationAvailability(boolean availability) {
@@ -66,12 +66,9 @@ public class DataManager {
         return sharedPreferences.getInt(THEME_KEY, 0);
     }
 
-    private LocationApp getLocationName() throws NotAvailableLocationException {
+    private LocationApp getLocationName(Location location) throws NotAvailableLocationException {
         LocationApp locationApp = new LocationApp();
         if (activity.checkLocationPermission()) {
-            LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-            Location location = locationManager.getLastKnownLocation(
-                    Objects.requireNonNull(locationManager.getBestProvider(new Criteria(), false)));
             try {
                 locationApp.latitude = (float) location.getLatitude();
                 locationApp.longitude = (float) location.getLongitude();
@@ -80,19 +77,8 @@ public class DataManager {
             } catch (NullPointerException e) {
                 throw new NotAvailableLocationException("Location not available");
             }
-        } else if (sharedPreferences.getFloat(LOCATION_LON, -200) == -200) {
-            String locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
-            locationApp = getLocationCoordinatesByLocationName(locationName);
-            if (locationApp == null) return null;
-            locationApp.locationName = locationName;
-            saveLocationCoordinates(locationApp);
-            return locationApp;
-        } else {
-            locationApp.locationName = sharedPreferences.getString(LOCATION_NAME_KEY, "");
-            locationApp.longitude = sharedPreferences.getFloat(LOCATION_LON, -200);
-            locationApp.latitude = sharedPreferences.getFloat(LOCATION_LAT, -200);
-            return locationApp;
         }
+        return locationApp;
     }
 
     private void saveLocationCoordinates(LocationApp locationApp) {

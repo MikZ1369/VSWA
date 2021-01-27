@@ -3,11 +3,13 @@ package com.vswa.ui.init;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,42 +56,25 @@ public class InitFragment extends Fragment {
     }
 
     private void showWelcomeText() {
-        AlphaAnimation animationWelcome = new AlphaAnimation(0.0f, 1.0f);
-        AlphaAnimation animationRequestMassage = new AlphaAnimation(0.0f, 1.0f);
-        AlphaAnimation animationAllowButton = new AlphaAnimation(0.0f, 1.0f);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.alpha_show);
 
-        animationWelcome.setDuration(1500);
-        animationWelcome.setStartOffset(1000);
-        animationWelcome.setFillAfter(true);
+            welcomeTextView.startAnimation(animation);
+            requestMassageTextView.startAnimation(animation);
+            allowButton.startAnimation(animation);
+        }
 
-        animationRequestMassage.setDuration(1500);
-        animationRequestMassage.setStartOffset(2700);
-        animationRequestMassage.setFillAfter(true);
-
-        animationAllowButton.setDuration(1000);
-        animationAllowButton.setStartOffset(2700);
-        animationAllowButton.setFillAfter(true);
-
-        welcomeTextView.startAnimation(animationWelcome);
-        requestMassageTextView.startAnimation(animationRequestMassage);
-        allowButton.startAnimation(animationAllowButton);
     }
 
     private void showNextButton() {
-        AlphaAnimation animationAllowButton = new AlphaAnimation(1.0f, 0.0f);
-        AlphaAnimation animationNextButton = new AlphaAnimation(0.0f, 1.0f);
-
-        animationAllowButton.setDuration(1000);
-        animationAllowButton.setStartOffset(300);
-        animationAllowButton.setFillAfter(true);
-
-        animationNextButton.setDuration(1000);
-        animationNextButton.setStartOffset(300);
-        animationNextButton.setFillAfter(true);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            Animation animationShow = AnimationUtils.loadAnimation(getContext(), R.anim.alpha_show);
+            Animation animationHide = AnimationUtils.loadAnimation(getContext(), R.anim.alpha_hide);
+            nextButton.startAnimation(animationShow);
+            allowButton.startAnimation(animationHide);
+        }
 
         nextButton.setVisibility(View.VISIBLE);
-        nextButton.startAnimation(animationNextButton);
-        allowButton.startAnimation(animationAllowButton);
     }
 
     @Override
@@ -97,8 +82,6 @@ public class InitFragment extends Fragment {
 //        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_LOCATION: {
-
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     showNextButton();

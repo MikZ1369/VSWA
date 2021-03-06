@@ -19,15 +19,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-//        switch (currentNightMode) {
-//            case Configuration.UI_MODE_NIGHT_NO:
-//                setTheme(R.style.LightMode);
-//                break;
-//            case Configuration.UI_MODE_NIGHT_YES:
-//                setTheme(R.style.DarkMode);
-//                break;
-//        }
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.LightMode);
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.DarkMode);
+                break;
+        }
         MainPresenter mainPresenter = new MainPresenter(this, this);
         setContentView(R.layout.activity_main);
         mainPresenter.onAttach();
